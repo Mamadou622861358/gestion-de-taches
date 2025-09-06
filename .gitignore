@@ -1,7 +1,2 @@
 node_modules
 dist
-babel.config.js
-jest.config.js
-NOTE_TECHNIQUE.md
-postcss.config.js
-redme.md
