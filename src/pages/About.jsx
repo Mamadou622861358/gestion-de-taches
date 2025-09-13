@@ -22,6 +22,18 @@ export default function About() {
         <p>
           Ce projet est idéal pour découvrir les bonnes pratiques de développement React et servir de base à des applications plus avancées.
         </p>
+        <p className="mt-4 font-semibold text-blue-700">
+          Pour utiliser au mieux ce site, veuillez consulter&nbsp;
+          <a
+            href="https://mamadou622861358.github.io/l-utilisation-du-site-de-gestion-de-taches/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-700 hover:text-blue-900"
+          >
+            ce guide d’utilisation détaillé
+          </a>
+          .
+        </p>
       </div>
     </section>
   )

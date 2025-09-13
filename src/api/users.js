@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/users";
+const API_URL = "https://backendgestiondetaches.onrender.com/api/users";
 
 export async function fetchUsers(token) {
   const res = await fetch(API_URL, {
