@@ -1,6 +1,6 @@
 // src/api/tasks.js
 
-const API_URL = "https://backendgestiondetaches.onrender.com/api/tasks";
+const API_URL = "https://addgestion-de-taches.onrender.com/api/tasks";
 
 export async function fetchTasks(token) {
   const res = await fetch(API_URL, {

@@ -21,7 +21,7 @@ export async function deleteComment(taskId, commentId, token) {
   if (!res.ok) throw new Error("Erreur lors de la suppression du commentaire");
   return res.json();
 }
-const API_URL = "https://backendgestiondetaches.onrender.com/api/tasks";
+const API_URL = "https://addgestion-de-taches.onrender.com/api/tasks";
 
 export async function addComment(taskId, text, token) {
   const res = await fetch(`${API_URL}/${taskId}/comments`, {

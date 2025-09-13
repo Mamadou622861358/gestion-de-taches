@@ -6,6 +6,17 @@ export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  // Fonction utilitaire pour corriger l’URL de la photo
+  const getPhotoUrl = (url) => {
+    if (!url) return "";
+    if (url.startsWith("http://") || url.startsWith("https://")) return url;
+    if (url.startsWith("/uploads"))
+      return `https://addgestion-de-taches.onrender.com${url}`;
+    if (!url.startsWith("/"))
+      return `https://addgestion-de-taches.onrender.com/uploads/${url}`;
+    return url;
+  };
+
   return (
     <header className="bg-white shadow">
       <nav className="container-page flex items-center gap-3 py-3">
@@ -67,7 +78,7 @@ export default function Navbar() {
               >
                 {user.photo ? (
                   <img
-                    src={user.photo}
+                    src={getPhotoUrl(user.photo)}
                     alt="Profil"
                     className="w-8 h-8 rounded-full object-cover border"
                   />

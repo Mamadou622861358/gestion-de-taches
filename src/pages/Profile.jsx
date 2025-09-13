@@ -28,26 +28,32 @@ function Profile() {
         formData.append("email", email);
         if (password) formData.append("password", password);
         formData.append("photoFile", photoFile);
-        res = await fetch(`http://localhost:5000/api/users/me`, {
-          method: "PUT",
-          headers: { Authorization: `Bearer ${token}` },
-          body: formData,
-        });
+        res = await fetch(
+          `https://addgestion-de-taches.onrender.com/api/users/me`,
+          {
+            method: "PUT",
+            headers: { Authorization: `Bearer ${token}` },
+            body: formData,
+          }
+        );
       } else {
         // Sinon, envoi JSON (URL)
-        res = await fetch(`http://localhost:5000/api/users/me`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password: password || undefined,
-            photo,
-          }),
-        });
+        res = await fetch(
+          `https://addgestion-de-taches.onrender.com/api/users/me`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              password: password || undefined,
+              photo,
+            }),
+          }
+        );
       }
       data = await res.json();
       if (!res.ok)
@@ -62,6 +68,18 @@ function Profile() {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Fonction utilitaire pour corriger l’URL de la photo
+  const getPhotoUrl = (url) => {
+    if (!url) return "";
+    if (url.startsWith("http://") || url.startsWith("https://")) return url;
+    if (url.startsWith("/uploads"))
+      return `https://addgestion-de-taches.onrender.com${url}`;
+    // Cas d’un nom de fichier simple (ex : 68c3fd...jpg)
+    if (!url.startsWith("/"))
+      return `https://addgestion-de-taches.onrender.com/uploads/${url}`;
+    return url;
   };
 
   return (
@@ -95,7 +113,11 @@ function Profile() {
           >
             {photo || photoFile ? (
               <img
-                src={photoFile ? URL.createObjectURL(photoFile) : photo}
+                src={
+                  photoFile
+                    ? URL.createObjectURL(photoFile)
+                    : getPhotoUrl(photo)
+                }
                 alt="Profil"
                 className="w-24 h-24 rounded-full object-cover border mb-2"
               />
@@ -189,7 +211,7 @@ function Profile() {
         <div className="space-y-2 flex flex-col items-center">
           {user?.photo ? (
             <img
-              src={user.photo}
+              src={getPhotoUrl(user.photo)}
               alt="Profil"
               className="w-24 h-24 rounded-full object-cover border mb-2"
             />
